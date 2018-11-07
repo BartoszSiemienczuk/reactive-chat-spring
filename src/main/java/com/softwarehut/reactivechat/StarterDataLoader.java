@@ -26,7 +26,7 @@ public class StarterDataLoader implements CommandLineRunner {
         mongoTemplate.dropCollection("messages").then(
             mongoTemplate.createCollection(
                     "messages",
-                    CollectionOptions.empty().capped().size(2048).maxDocuments(10000)
+                    CollectionOptions.empty().capped().size(10240).maxDocuments(100000)
             )
         ).subscribe();
 

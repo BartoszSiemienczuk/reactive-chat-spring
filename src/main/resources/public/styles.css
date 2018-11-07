@@ -88,7 +88,7 @@ body {
 }
 body {
     padding: 150px 0;
-    background: #9b59b6;
+    background: #dc5b1a;
 }
 .chat {
     border-radius: 5px;
@@ -201,4 +201,22 @@ body {
     #preview {
         display: block;
     }
+}
+
+.input-container,
+.settings-container{
+    width:98%;
+    margin:5px 1%;
+}
+.input-container > input {
+    width:79%;
+}
+.input-container > button {
+    width:20%;
+}
+#room-select{
+    float:right
+}
+.settings-container label{
+    color:#fff;
 }
