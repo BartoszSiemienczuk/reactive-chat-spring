@@ -2,6 +2,8 @@ package com.softwarehut.reactivechat;
 
 import com.softwarehut.reactivechat.model.Message;
 import com.softwarehut.reactivechat.service.repository.MessageRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.mongodb.core.CollectionOptions;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Component
 public class StarterDataLoader implements CommandLineRunner {
+    private static final Logger logger = LoggerFactory.getLogger(StarterDataLoader.class);
     private final MessageRepository msgRepo;
     private final ReactiveMongoTemplate mongoTemplate;
 
@@ -39,7 +42,7 @@ public class StarterDataLoader implements CommandLineRunner {
 
         Flux.fromIterable(messagesToInsert).subscribe(message -> {
             msgRepo.insert(message).subscribe(insertedMessage -> {
-                System.out.println("Message with content: /" + insertedMessage.getContent() + "/ was inserted.");
+                logger.debug("Message with content: /" + insertedMessage.getContent() + "/ was inserted.");
             });
         });
     }

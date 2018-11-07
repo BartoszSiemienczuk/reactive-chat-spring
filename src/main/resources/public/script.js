@@ -24,13 +24,15 @@ $(document).ready(function(){
 var initStreamHandler = function(){
     clearMessages();
 
-    //Pobieramy dane
+    //Pobieramy dane użytkownika
     room = $('#room-select').val();
     user = $('#username').val();
     console.log("Connecting user " + user + " to room " + room);
+    //Jeśli istnieje połączenie to je zamykamy
     if(typeof stream !== 'undefined'){
         stream.close();
     }
+
     //Tworzymy EventSource kierujące się do endpointa produkującego text/event-stream
     stream = new EventSource(baseUrl + "rooms/"+room);
     //Dodajemy funkcję obsługującą przychodzące eventy
@@ -40,6 +42,8 @@ var initStreamHandler = function(){
         //Obsłużmy UI
         displayMessage(messageObject);
     });
+
+    //Dodajemy callbacki do obsłużenia problemów z połączeniem
     stream.onerror = function(e){
         clearMessages();
         displayMessage({"content":"Retrying connection...", "user":"System"});
@@ -60,7 +64,7 @@ var displayMessage = function(message){
     }
 
     chat_.append('<div class="'+ cls +'">' +
-        '<img src=\"http://api.randomuser.me/portraits/med/men/'+photo+'.jpg\" />' +
+        '<img title="'+message.user+'" src=\"http://api.randomuser.me/portraits/med/men/'+photo+'.jpg\" />' +
         '<div><p>'+message.content+'</p></div>' +
         '</div>');
 

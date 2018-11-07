@@ -2,6 +2,8 @@ package com.softwarehut.reactivechat.rest;
 
 import com.softwarehut.reactivechat.model.Message;
 import com.softwarehut.reactivechat.service.repository.MessageRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -9,8 +11,13 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 
+/*
+Kontroler utworzony klasyczną metodą adnotacji do złudzenia przypomina kontroler
+klasycznego, blokującego Spring MVC. Korzysta jednak z reaktywnym typów w non-blocking sposób.
+ */
 @RestController
 public class ClassicController {
+    private static final Logger logger = LoggerFactory.getLogger(ClassicController.class);
     private MessageRepository messageRepository;
 
     public ClassicController(MessageRepository messageRepository) {
@@ -45,6 +52,7 @@ public class ClassicController {
 
     @PostMapping("/messages")
     public Mono<Message> createMessage(@Valid @RequestBody Message message){
+        logger.debug("Got a message on annotated controller.");
         return messageRepository.save(message);
     }
 

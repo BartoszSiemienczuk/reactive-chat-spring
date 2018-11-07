@@ -15,6 +15,10 @@ public class FunctionalRoutes {
         this.handler = handler;
     }
 
+    /*
+    Routing poprzez model funkcyjny jest dużo lżejszy od klasycznej annotaded metody.
+    Używa o wiele mniej klas pośredniczących. Jest również przyjazne np. dla osób wywodzących się z node.js :)
+     */
     @Bean
     RouterFunction<ServerResponse> messageRoutes() {
         return RouterFunctions.nest(
