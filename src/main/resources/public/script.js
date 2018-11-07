@@ -1,6 +1,6 @@
 var room = "room1";
 var user = "Me";
-var baseUrl = "//localhost:8080/functional/";
+var baseUrl = self.location.origin + "/functional/";
 var chat_;
 var stream;
 
@@ -68,6 +68,7 @@ var displayMessage = function(message){
         '<div><p>'+message.content+'</p></div>' +
         '</div>');
 
+    chat_.scrollTop(chat_.prop("scrollHeight"));
 
 };
 
