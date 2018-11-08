@@ -27,6 +27,7 @@ repositories {
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
     implementation('org.springframework.boot:spring-boot-starter-webflux')
+    compile ('de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.1.1')
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
     compileOnly('org.projectlombok:lombok')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
